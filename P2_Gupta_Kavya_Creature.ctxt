@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=P2_Gupta_Kavya_Creature
+comment0.text=\r\n\ Represents\ a\ creature\ that\ moves\ toward\ treats\ and\ eats\ them.\r\n\ \r\n\ @author\ Kavya\ Gupta\ \r\n\ @version\ 3/7/2023\r\n
+comment1.params=
+comment1.target=void\ act()
+comment2.params=startRot
+comment2.target=void\ dontTouchWall(int)
+comment3.params=
+comment3.target=int\ returnDirection()
+comment4.params=t
+comment4.target=int\ numMovesToReach(Treat)
+comment5.params=
+comment5.target=Treat\ closestReachTreat()
+comment6.params=rotation
+comment6.target=boolean\ directionIsClear(int)
+numComments=7
