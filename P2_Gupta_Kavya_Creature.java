@@ -18,15 +18,11 @@ public class P2_Gupta_Kavya_Creature extends Actor {
     int starting = 1;
 
     public void act() {
-        if(starting==1) {
-            wall = getWorld().getObjects(Wall.class).get(0);
-            //starting=0;
-        }
-
-        // if(isTouching(Wall.class)) {
-            // System.out.println("bad start");
-            // //setLocation(startX, startY);
+        // if(starting==1) {
+        // wall = getWorld().getObjects(Wall.class).get(0);
+        // //starting=0;
         // }
+
         int startX = getX();
         int startY = getY();
         if(closestReachTreat() != null) {
@@ -46,12 +42,20 @@ public class P2_Gupta_Kavya_Creature extends Actor {
                 target = null;
             }
         } else {
-            if(!touchingWall()) {
-                turnTowards(wall.getX(), wall.getY());
-                move(1);
-                if(touchingWall()) {
-                    wanderRot = changeWanderRot(wanderRot);
-                    wall = wallAtDirection(wanderRot);
+            if(wallAtDirection(0) == null && wallAtDirection(90) == null && wallAtDirection(270) == null && wallAtDirection(180) == null) {
+                if(wall == null) {
+                    setRotation(0);
+                    move(1);
+                    wanderRot = 0;
+                } else {
+                    turnTowards(wall.getX(), wall.getY());
+                    move(1);
+                    setRotation(0);
+                    if(wallAtDirection(0) != null) {
+                        wanderRot = 0;
+                        wanderRot = changeWanderRot(wanderRot);
+                        wall = wallAtDirection(0);
+                    }
                 }
             } else {
                 if(!directionIsClear(wanderRot)) {
@@ -126,7 +130,7 @@ public class P2_Gupta_Kavya_Creature extends Actor {
     }
 
     public boolean touchingWall() {
-        return getOneIntersectingObject(Wall.class) != null;
+        return isTouching(Wall.class);
     }
 
     public void dontTouchWall(int startRot) {
@@ -215,10 +219,11 @@ public class P2_Gupta_Kavya_Creature extends Actor {
 
         int w = getImage().getWidth();
         int h = getImage().getHeight();
+        int dd = 0;
 
         // 0 for north, 1 for east, 2 for south, 3 for west, 4 for north/south
-        int[] dx = new int[]{-w/2+2, w/2-2, -w/2+2, -(w/2)+2, w/2-2};
-        int[] dy = new int[]{-(h/2)+2, -h/2-2, h/2-2, -h/2+2, h/2-2};
+        int[] dx = new int[]{-w/2+dd, w/2-dd, -w/2+dd, -(w/2)+dd, w/2-dd};
+        int[] dy = new int[]{-(h/2)+dd, -h/2-dd, h/2-dd, -h/2+dd, h/2-dd};
 
         setRotation(startRot);
 
@@ -231,7 +236,7 @@ public class P2_Gupta_Kavya_Creature extends Actor {
                 i+= counter;
                 clear = getOneObjectAtOffset(i, dy[direction], Wall.class) == null;
                 if(!clear) {
-                    break;
+                    return clear;
                 }
             }
         } else {
@@ -240,7 +245,7 @@ public class P2_Gupta_Kavya_Creature extends Actor {
                 i+= counter;
                 clear = getOneObjectAtOffset(dx[direction], i, Wall.class) == null;
                 if(!clear) {
-                    break;
+                    return clear;
                 }
             }
         }
