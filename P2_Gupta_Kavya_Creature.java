@@ -217,8 +217,8 @@ public class P2_Gupta_Kavya_Creature extends Actor {
         int h = getImage().getHeight();
 
         // 0 for north, 1 for east, 2 for south, 3 for west, 4 for north/south
-        int[] dx = new int[]{-w/2, w/2, -w/2, -(w/2), w/2};
-        int[] dy = new int[]{-(h/2), -h/2, h/2, -h/2, h/2};
+        int[] dx = new int[]{-w/2+2, w/2-2, -w/2+2, -(w/2)+2, w/2-2};
+        int[] dy = new int[]{-(h/2)+2, -h/2-2, h/2-2, -h/2+2, h/2-2};
 
         setRotation(startRot);
 
